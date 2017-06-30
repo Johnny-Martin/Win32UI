@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+
+*.vcxproj.user
+*.opendb
+*.ipch
+*.tlog
+*.log
+*.obj
+*.exe
+*.ilk
+*.pdb
+*.pch
+*.suo
+*.aps
+*.db
