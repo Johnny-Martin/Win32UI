@@ -192,11 +192,10 @@ void CMFCDemoDlg::OnTimer(UINT_PTR nIDEvent)
 	{
 		m_pCurve = new BaseElement::Curve(m_pWindowDC);
 	}
-	m_pCurve->AddNewPoint(10, 10);
-	m_pCurve->AddNewPoint(20, 20);
-	m_pCurve->AddNewPoint(25, 10);
-	m_pCurve->AddNewPoint(30, 50);
-	m_pCurve->AddNewPoint(10, 40);
-	m_pCurve->AddNewPoint(60, 10);
+	srand((unsigned int)time(NULL));
+	int x = rand();
+	int y = rand();
+	m_pCurve->AddNewPoint(x%500, y%500);
+
 	CDialogEx::OnTimer(nIDEvent);
 }

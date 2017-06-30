@@ -18,6 +18,9 @@ Curve::Curve(CDC* pDC, int iMaxPointCount, int iLineWidth):
 
 void Curve::AddNewPoint(int x, int y)
 {
+	if (m_vecPoints.size() > 10240)
+		return;
+
 	m_vecPoints.push_back(std::pair<int, int>(x, y));
 	
 	Draw();
