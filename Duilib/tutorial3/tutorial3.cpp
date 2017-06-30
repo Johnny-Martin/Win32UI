@@ -59,7 +59,7 @@ public:
 	}
 
 	~CMyWnd(){
-		delete m_pRoot;
+		//delete m_pRoot;
 	}
 private:
 	CPaintManagerUI m_PaintMgr; 
