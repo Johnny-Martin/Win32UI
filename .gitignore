@@ -38,6 +38,7 @@
 *.log
 *.obj
 *.exe
+*.idb
 *.ilk
 *.pdb
 *.pch
