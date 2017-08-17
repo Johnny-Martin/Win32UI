@@ -1,0 +1,11 @@
+obj\Debug\GDIPlusDemo.exe
+obj\Debug\GDIPlusDemo.pdb
+bin\Debug\GDIPlusDemo.exe
+bin\Debug\GDIPlusDemo.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\GDIPlusDemo.csproj.ResolveComReference.cache
+obj\Debug\GDIPlusDemo.Form1.resources
+obj\Debug\GDIPlusDemo.Form2.resources
+obj\Debug\GDIPlusDemo.Form3.resources
+obj\Debug\GDIPlusDemo.csproj.GenerateResource.Cache
+bin\Debug\butterfly.bmp

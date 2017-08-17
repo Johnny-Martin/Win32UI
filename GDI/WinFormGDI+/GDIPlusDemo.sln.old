@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDIPlusDemo", "GDIPlusDemo.csproj", "{C0F6FFAF-DE16-4DB0-B2F0-B40302E94491}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{C0F6FFAF-DE16-4DB0-B2F0-B40302E94491}.Debug.ActiveCfg = Debug|.NET
+		{C0F6FFAF-DE16-4DB0-B2F0-B40302E94491}.Debug.Build.0 = Debug|.NET
+		{C0F6FFAF-DE16-4DB0-B2F0-B40302E94491}.Release.ActiveCfg = Release|.NET
+		{C0F6FFAF-DE16-4DB0-B2F0-B40302E94491}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

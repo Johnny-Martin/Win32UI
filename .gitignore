@@ -31,6 +31,12 @@
 *.out
 *.app
 
+Release/
+Backup/
+Debug/
+ipch/
+.vs/
+
 *.vcxproj.user
 *.opendb
 *.ipch

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="GDIPlusDemo">
+</Property><Property Name="解决方案文件" Value="F:\Source\VS2005\C#\GDI+ Demo\GDIPlusDemo.sln">
+</Property><Property Name="用户选项文件" Value="F:\Source\VS2005\C#\GDI+ Demo\GDIPlusDemo.suo">
+</Property><Property Name="Date" Value="2007年2月28日">
+</Property><Property Name="Time" Value="9:38">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="GDIPlusDemo.sln" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\GDIPlusDemo.sln">
+</Event><Event ErrorLevel="0" Project="" Source="GDIPlusDemo.suo" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\GDIPlusDemo.suo">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="GDIPlusDemo.csproj" Description="项目文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\GDIPlusDemo.csproj">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="GDIPlusDemo.csproj.user" Description="项目用户文件成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\GDIPlusDemo.csproj.user">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="AssemblyInfo.cs" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="Form1.cs" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\Form1.cs">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="Form2.cs" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\Form2.cs">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="Form3.cs" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\Form3.cs">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="App.ico" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\App.ico">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="Form1.resx" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\Form1.resx">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="Form2.resx" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\Form2.resx">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="Form3.resx" Description="文件已成功备份为 F:\Source\VS2005\C#\GDI+ Demo\Backup\Form3.resx">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="GDIPlusDemo.csproj" Description="项目已成功转换">
+</Event><Event ErrorLevel="3" Project="GDIPlusDemo" Source="GDIPlusDemo.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="GDIPlusDemo.sln" Description="成功转换解决方案">
+</Event><Event ErrorLevel="3" Project="" Source="GDIPlusDemo.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="GDIPlusDemo" Source="GDIPlusDemo.csproj" Description="扫描完成: 项目文件不需要升级。">
+</Event></UpgradeLog>

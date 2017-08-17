@@ -1,0 +1,11 @@
+F:\3.Source\VS2005\C#\GDI+ Demo\obj\Debug\GDIPlusDemo.exe
+F:\3.Source\VS2005\C#\GDI+ Demo\obj\Debug\GDIPlusDemo.pdb
+F:\3.Source\VS2005\C#\GDI+ Demo\bin\Debug\butterfly.bmp
+F:\3.Source\VS2005\C#\GDI+ Demo\bin\Debug\GDIPlusDemo.exe
+F:\3.Source\VS2005\C#\GDI+ Demo\bin\Debug\GDIPlusDemo.pdb
+F:\3.Source\VS2005\C#\GDI+ Demo\obj\Debug\ResolveAssemblyReference.cache
+F:\3.Source\VS2005\C#\GDI+ Demo\obj\Debug\GDIPlusDemo.csproj.ResolveComReference.cache
+F:\3.Source\VS2005\C#\GDI+ Demo\obj\Debug\GDIPlusDemo.Form1.resources
+F:\3.Source\VS2005\C#\GDI+ Demo\obj\Debug\GDIPlusDemo.Form2.resources
+F:\3.Source\VS2005\C#\GDI+ Demo\obj\Debug\GDIPlusDemo.Form3.resources
+F:\3.Source\VS2005\C#\GDI+ Demo\obj\Debug\GDIPlusDemo.csproj.GenerateResource.Cache
