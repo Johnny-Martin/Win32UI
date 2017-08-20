@@ -23,19 +23,17 @@ int WINAPI WinMain(
 	// unlikely event that HeapSetInformation fails.
 	HeapSetInformation(NULL, HeapEnableTerminationOnCorruption, NULL, 0);
 
-	if (SUCCEEDED(CoInitialize(NULL)))
-	{
-		{
-			DemoApp app;
+	if (FAILED(CoInitialize(NULL))){
+		return 0;
+	}
+	
+	DemoApp app;
 
-			if (SUCCEEDED(app.Initialize()))
-			{
-				app.RunMessageLoop();
-			}
-		}
-		CoUninitialize();
+	if (SUCCEEDED(app.Initialize())){
+		app.RunMessageLoop();
 	}
 
+	CoUninitialize();
 	return 0;
 }
 
@@ -146,7 +144,8 @@ HRESULT DemoApp::CreateDeviceResources()
 	if (!m_pRenderTarget)
 	{
 		RECT rc;
-		GetClientRect(m_hwnd, &rc);
+		//GetClientRect(m_hwnd, &rc);
+		GetWindowRect(m_hwnd, &rc);
 
 		D2D1_SIZE_U size = D2D1::SizeU(
 			rc.right - rc.left,
