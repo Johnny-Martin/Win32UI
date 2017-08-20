@@ -1,13 +1,8 @@
-// Win32GDI+.cpp : 定义应用程序的入口点。
+// Demo.cpp : 定义应用程序的入口点。
 //
 
 #include "stdafx.h"
-#include "Win32GDI+.h"
-
-#include<gdiplus.h>
-using namespace Gdiplus;
-#pragma comment(lib, "GdiPlus.lib")
-
+#include "Demo.h"
 
 #define MAX_LOADSTRING 100
 
@@ -21,7 +16,6 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
-void TestGdiplus(HWND hwnd, HDC hdc);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -32,13 +26,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 在此放置代码。
-	ULONG_PTR g_gdiplusToken;
-	GdiplusStartupInput gdiStartupInput;
-	GdiplusStartup(&g_gdiplusToken, &gdiStartupInput, NULL);
 
     // 初始化全局字符串
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_WIN32GDI, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_DEMO, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // 执行应用程序初始化: 
@@ -47,7 +38,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WIN32GDI));
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DEMO));
 
     MSG msg;
 
@@ -61,7 +52,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
-	GdiplusShutdown(g_gdiplusToken);
     return (int) msg.wParam;
 }
 
@@ -83,10 +73,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WIN32GDI));
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_DEMO));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_WIN32GDI);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_DEMO);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -157,7 +147,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 在此处添加使用 hdc 的任何绘图代码...
-			TestGdiplus(hWnd, hdc);
             EndPaint(hWnd, &ps);
         }
         break;
@@ -188,26 +177,4 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
-}
-
-void TestGdiplus(HWND hwnd, HDC hdc)
-{
-	Image image(L"test.png");
-	if (image.GetLastStatus() != Status::Ok) {
-		MessageBox(hwnd, L"加载图片失败", L"警告", MB_OK);
-		return;
-	}
-	auto width  = image.GetWidth();
-	auto height = image.GetHeight();
-	Graphics graphic(hdc);
-	graphic.DrawImage(&image, 100, 100, width, height);
-
-	LinearGradientBrush linGrBrush(
-		Point(100, 0),
-		Point(width+100, 0),
-		Color(0x0, 0x0, 0x0, 0x0),  //起点色彩	
-		Color::Green			    //止点色彩
-	);  
-
-	graphic.FillRectangle(&linGrBrush, 100, 100, width, height);
 }
