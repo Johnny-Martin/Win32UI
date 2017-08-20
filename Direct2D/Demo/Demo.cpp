@@ -162,6 +162,8 @@ HRESULT DemoApp::CreateDeviceResources()
 
 		if (SUCCEEDED(hr))
 		{
+			//m_pRenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+			//m_pRenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
 			// Create a gray brush.
 			hr = m_pRenderTarget->CreateSolidColorBrush(
 				D2D1::ColorF(D2D1::ColorF::LightSlateGray),
