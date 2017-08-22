@@ -160,6 +160,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		HDC hdc = BeginPaint(hWnd, &ps);
 		// TODO: 在此处添加使用 hdc 的任何绘图代码...
 		std::cout << ps.rcPaint.left << " : " << ps.rcPaint.top << " : " << ps.rcPaint.right << " : " << ps.rcPaint.bottom << std::endl;
+		RECT rect;
+		::GetUpdateRect(hWnd, &rect, true);
 		TestGdiplus(hWnd, hdc);
 		EndPaint(hWnd, &ps);
 	}
