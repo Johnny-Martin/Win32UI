@@ -338,7 +338,7 @@ LRESULT CALLBACK DemoApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 			break;
 
 			case WM_DISPLAYCHANGE:
-			{
+			{	//显示分辨率更改后，所有窗口都会收到该事件
 				InvalidateRect(hwnd, NULL, FALSE);
 			}
 			result = 0;

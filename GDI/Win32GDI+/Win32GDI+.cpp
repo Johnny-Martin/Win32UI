@@ -5,8 +5,10 @@
 #include "Win32GDI+.h"
 
 #include<gdiplus.h>
+#include<iostream>
 using namespace Gdiplus;
 #pragma comment(lib, "GdiPlus.lib")
+#pragma comment(linker, "/subsystem:\"console\" /entry:\"wWinMainCRTStartup\" ")
 
 
 #define MAX_LOADSTRING 100
@@ -133,34 +135,42 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)
-    {
-    case WM_COMMAND:
-        {
-            int wmId = LOWORD(wParam);
-            // 分析菜单选择: 
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
-        }
-        break;
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 在此处添加使用 hdc 的任何绘图代码...
-			TestGdiplus(hWnd, hdc);
-            EndPaint(hWnd, &ps);
-        }
-        break;
+	switch (message)
+	{
+	case WM_COMMAND:
+	{
+		int wmId = LOWORD(wParam);
+		// 分析菜单选择: 
+		switch (wmId)
+		{
+		case IDM_ABOUT:
+			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+			break;
+		case IDM_EXIT:
+			DestroyWindow(hWnd);
+			break;
+		default:
+			return DefWindowProc(hWnd, message, wParam, lParam);
+		}
+	}
+		break;
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hWnd, &ps);
+		// TODO: 在此处添加使用 hdc 的任何绘图代码...
+		std::cout << ps.rcPaint.left << " : " << ps.rcPaint.top << " : " << ps.rcPaint.right << " : " << ps.rcPaint.bottom << std::endl;
+		TestGdiplus(hWnd, hdc);
+		EndPaint(hWnd, &ps);
+	}
+		break;
+	case WM_SIZE:
+	{
+		UINT width = LOWORD(lParam);
+		UINT height = HIWORD(lParam);
+		std::cout << "new width : " << width << "  new height : " << height << std::endl;
+	}
+		break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
