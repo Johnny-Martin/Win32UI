@@ -21,6 +21,7 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
 WCHAR szWindowClass[MAX_LOADSTRING];            // 主窗口类名
 HRESULT EnableBlurBehind(HWND hwnd);			// 毛玻璃
 void EnableTransparent(HWND hWnd);
+HRESULT ExtendIntoClientAll(HWND hWnd);
 
 // 此代码模块中包含的函数的前向声明: 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -121,7 +122,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
-   //EnableTransparent(hWnd);
+   ExtendIntoClientAll(hWnd);
+   EnableTransparent(hWnd);
    EnableBlurBehind(hWnd);
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
@@ -302,6 +304,23 @@ BOOL TryWin10(HWND hWnd)
 	return false;
 }
 
+HRESULT ExtendIntoClientAll(HWND hwnd)
+{
+	// Negative margins have special meaning to DwmExtendFrameIntoClientArea.
+	// Negative margins create the "sheet of glass" effect, where the client area
+	// is rendered as a solid surface with no window border.
+	MARGINS margins = { -1 };
+	HRESULT hr = S_OK;
+
+	// Extend the frame across the entire window.
+	hr = DwmExtendFrameIntoClientArea(hwnd, &margins);
+	if (SUCCEEDED(hr))
+	{
+		// ...
+	}
+	return hr;
+}
+
 void EnableTransparent(HWND  hwnd)
 {
 	//开启半透明
@@ -309,7 +328,7 @@ void EnableTransparent(HWND  hwnd)
 	exStyle |= WS_EX_LAYERED;
 	::SetWindowLong(hwnd, GWL_EXSTYLE, exStyle);
 	//::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 200, LWA_COLORKEY);
-	::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 255, LWA_ALPHA);
+	::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 200, LWA_ALPHA);
 	//::UpdateLayeredWindow(hwnd, );																
 }
 
