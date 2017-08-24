@@ -122,7 +122,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
-   ExtendIntoClientAll(hWnd);
+   //ExtendIntoClientAll(hWnd);
    EnableTransparent(hWnd);
    EnableBlurBehind(hWnd);
    ShowWindow(hWnd, nCmdShow);
@@ -328,7 +328,7 @@ void EnableTransparent(HWND  hwnd)
 	exStyle |= WS_EX_LAYERED;
 	::SetWindowLong(hwnd, GWL_EXSTYLE, exStyle);
 	//::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 200, LWA_COLORKEY);
-	::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 200, LWA_ALPHA);
+	::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 230, LWA_ALPHA);
 	//::UpdateLayeredWindow(hwnd, );																
 }
 
