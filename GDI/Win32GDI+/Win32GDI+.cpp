@@ -20,6 +20,7 @@ HINSTANCE hInst;                                // 当前实例
 WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
 WCHAR szWindowClass[MAX_LOADSTRING];            // 主窗口类名
 HRESULT EnableBlurBehind(HWND hwnd);			// 毛玻璃
+void EnableTransparent(HWND hWnd);
 
 // 此代码模块中包含的函数的前向声明: 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -90,7 +91,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hInstance      = hInstance;
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WIN32GDI));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
+    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOWFRAME + 1);//
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_WIN32GDI);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
@@ -120,10 +121,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
+   //EnableTransparent(hWnd);
    EnableBlurBehind(hWnd);
+   ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-  
+   //EnableBlurBehind(hWnd);//放在此处会导致title没有毛玻璃
 
    return TRUE;
 }
@@ -262,8 +264,9 @@ BOOL TryWin10(HWND hWnd)
 	typedef struct _WINDOWCOMPOSITIONATTRIBDATA
 	{
 		WINDOWCOMPOSITIONATTRIB Attrib;
-		PVOID pvData;
-		SIZE_T cbData;
+		PVOID					pvData;
+		SIZE_T					cbData;
+		
 	} WINDOWCOMPOSITIONATTRIBDATA;
 
 	typedef enum _ACCENT_STATE
@@ -277,10 +280,10 @@ BOOL TryWin10(HWND hWnd)
 
 	typedef struct _ACCENT_POLICY
 	{
-		ACCENT_STATE AccentState;
-		DWORD AccentFlags;
-		DWORD GradientColor;
-		DWORD AnimationId;
+		ACCENT_STATE	AccentState;
+		DWORD			AccentFlags;
+		DWORD			GradientColor;
+		DWORD			AnimationId;
 	} ACCENT_POLICY;
 
 	typedef BOOL(WINAPI*pfnSetWindowCompositionAttribute)(HWND, WINDOWCOMPOSITIONATTRIBDATA*);
@@ -291,25 +294,27 @@ BOOL TryWin10(HWND hWnd)
 		pfnSetWindowCompositionAttribute setWindowCompositionAttribute = (pfnSetWindowCompositionAttribute)GetProcAddress(hUser, "SetWindowCompositionAttribute");
 		if (setWindowCompositionAttribute)
 		{
-			ACCENT_POLICY accent = { ACCENT_ENABLE_BLURBEHIND, 0, 0, 0 };
-			WINDOWCOMPOSITIONATTRIBDATA data;
-			data.Attrib = WCA_ACCENT_POLICY;
-			data.pvData = &accent;
-			data.cbData = sizeof(accent);
+			ACCENT_POLICY				accentPolicy{ ACCENT_ENABLE_BLURBEHIND, 0, 0, 0 };//0x20 | 0x40 | 0x80 | 0x100
+			WINDOWCOMPOSITIONATTRIBDATA data{ WCA_ACCENT_POLICY, &accentPolicy, sizeof(ACCENT_POLICY)};
 			return setWindowCompositionAttribute(hWnd, &data);
 		}
 	}
+	return false;
 }
 
-HRESULT EnableBlurBehind(HWND hwnd)
+void EnableTransparent(HWND  hwnd)
 {
 	//开启半透明
 	DWORD exStyle = ::GetWindowLong(hwnd, GWL_EXSTYLE);
 	exStyle |= WS_EX_LAYERED;
 	::SetWindowLong(hwnd, GWL_EXSTYLE, exStyle);
-	::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 100, LWA_ALPHA);//LWA_COLORKEY
-	//::UpdateLayeredWindow(hwnd, );
+	//::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 200, LWA_COLORKEY);
+	::SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 255, LWA_ALPHA);
+	//::UpdateLayeredWindow(hwnd, );																
+}
 
+HRESULT EnableBlurBehind(HWND hwnd)
+{
 	//启动毛玻璃
 	if (TryWin10(hwnd))
 		return S_OK;
