@@ -3,18 +3,21 @@
 
 #include "stdafx.h"
 #include "Win32GDI+.h"
-#include "Dwmapi.h"//毛玻璃
-
+#include <Dwmapi.h>//毛玻璃
+#include <Shlwapi.h>
+#include <memory>
 #include<gdiplus.h>
 #include<iostream>
 using namespace Gdiplus;
 #pragma comment(lib, "GdiPlus.lib")
 #pragma comment(lib, "Dwmapi.lib")
+#pragma comment(lib, "Shlwapi.lib")
 #pragma comment(linker, "/subsystem:\"console\" /entry:\"wWinMainCRTStartup\" ")
 
 
 #define MAX_LOADSTRING 100
 
+using namespace std;
 // 全局变量: 
 HINSTANCE hInst;                                // 当前实例
 WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
@@ -211,9 +214,78 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
+bool Str2WStr(const string& str, wstring& wstr)
+{
+	DWORD wstrLength = MultiByteToWideChar(CP_ACP, 0, (LPCSTR)str.c_str(), -1, nullptr, 0);
+	if (wstrLength <= 0) { return false; }
+	wstr.resize(wstrLength - 1, '\0');
+	int strLength = (int)str.length();
+	int nResult = MultiByteToWideChar(CP_ACP, 0, (LPCSTR)str.c_str(), strLength, (LPWSTR)wstr.c_str(), wstrLength);
+	if (nResult == 0) { return false; }
+	return true;
+}
+std::wstring StringToWString(const std::string& str) 
+{
+	int num = MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, NULL, 0);
+	wchar_t *wide = new wchar_t[num];
+	MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, wide, num);
+	std::wstring w_str(wide);
+	delete[] wide;
+	return w_str;
+}
+string WStringToString(const wstring& wstr)
+{
+	DWORD strLength = WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)wstr.c_str(), -1, nullptr, 0, nullptr, 0);
+	if (strLength <= 0) { return false; }
+	char* buf = new char[strLength];
+	WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)wstr.c_str(), -1, buf, strLength, NULL, NULL);
+	string strRet(buf);
+	delete buf;
+
+	return strRet;
+}
+bool WStr2Str(const wstring& wstr, string& str)
+{
+	DWORD strLength = WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)wstr.c_str(), -1, nullptr, 0, nullptr, 0);
+	if (strLength <= 0) { return false; }
+	str.resize(strLength, '\0');
+	int wstrLength = (int)wstr.length();
+	int nResult = WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)wstr.c_str(), wstrLength, (LPSTR)str.c_str(), strLength, NULL, NULL);
+	if (nResult == 0) { return false; }
+	return true;
+}
 void TestGdiplus(HWND hwnd, HDC hdc)
 {
-	Image image(L"test.png");
+
+	std::string strFileName = "texture.你好.fuck.png";
+	int cnt = strFileName.length();
+	wstring wstr = StringToWString(strFileName);
+	cnt = wstr.length();
+	strFileName = WStringToString(wstr);
+	cnt = strFileName.length();
+
+	Str2WStr(strFileName, wstr);
+	Str2WStr("你好你好你好你好你好", wstr);
+	WStr2Str(wstr, strFileName);
+
+	std::wstring wstr2 = L"texture.你好.fuck.png";
+	cnt = wstr2.length();
+	cnt = wstr2.size();
+
+	TCHAR szFilePath[MAX_PATH + 1] = { 0 };
+	GetModuleFileName(NULL, szFilePath, MAX_PATH);
+	(_tcsrchr(szFilePath, _T('\\')))[1] = 0; // 删除文件名，只获得路径字串
+	std::wstring str_url = szFilePath;
+	str_url +=	L"..\\..\\test.png";
+	bool exisit = ::PathFileExists(str_url.c_str());
+	bool isDebuging = false;
+#ifdef _DEBUG
+	isDebuging = true;
+#endif // DEBUG
+	
+	std::cout << "test.png file exisit: " << exisit << " isDebuging: " << isDebuging << std::endl;
+
+	Image image(L"..\\..\\test.png");
 	if (image.GetLastStatus() != Status::Ok) {
 		MessageBox(hwnd, L"加载图片失败", L"警告", MB_OK);
 		return;
