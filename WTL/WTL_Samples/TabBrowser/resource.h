@@ -1,12 +1,10 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ 生成的包含文件。
-// 供 TabBrowser.rc 使用
+// Microsoft Visual C++ generated include file.
+// Used by TabBrowser.RC
 //
+
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
-#define IDR_MAINFRAME_ICON              128
-#define IDR_MAINFRAME_Menu              128
-#define IDR_MAINFRAME_Toolbar           128
 #define IDS_OPEN_ERROR                  129
 #define IDD_OPEN                        201
 #define IDD_WINDOWS                     202
