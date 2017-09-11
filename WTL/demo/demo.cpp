@@ -13,7 +13,8 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 
 	CMyWindow dlgMain;
 
-	if (dlgMain.Create(::GetDesktopWindow(),CMyWindow::rcDefault,_T("ATL Scribble"), WS_OVERLAPPEDWINDOW, 0) == NULL)
+	DWORD dStyle = WS_OVERLAPPED | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+	if (dlgMain.Create(nullptr, CMyWindow::rcDefault, nullptr, dStyle) == NULL)
 	{
 		ATLTRACE(_T("Main dialog creation failed!\n"));
 		return 0;
