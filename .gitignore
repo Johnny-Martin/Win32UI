@@ -35,6 +35,8 @@
 Release/
 Backup/
 *-Debug/
+Debug*/
+Backup/
 Debug/
 ipch/
 .vs/
@@ -52,5 +54,6 @@ ipch/
 *.pdb
 *.pch
 *.suo
+*.htm
 *.aps
 *.db
