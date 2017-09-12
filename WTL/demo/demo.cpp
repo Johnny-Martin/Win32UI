@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "CMyWindow.h"
+#include "GDITrigger.h"
 
 CAppModule _Module;
 
@@ -13,7 +14,7 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 
 	CMyWindow dlgMain;
 
-	DWORD dStyle = WS_OVERLAPPED | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+	DWORD dStyle = WS_OVERLAPPED | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;// | WS_SYSMENU
 	if (dlgMain.Create(nullptr, CMyWindow::rcDefault, nullptr, dStyle) == NULL)
 	{
 		ATLTRACE(_T("Main dialog creation failed!\n"));
@@ -37,6 +38,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
 	HRESULT hRes = ::CoInitialize(NULL);
+	GDITrigger::Init();
+
 	// If you are running on NT 4.0 or higher you can use the following call instead to 
 	// make the EXE free threaded. This means that calls come in on a random RPC thread.
 	//	HRESULT hRes = ::CoInitializeEx(NULL, COINIT_MULTITHREADED);
