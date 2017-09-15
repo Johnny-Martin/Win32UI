@@ -12,22 +12,22 @@ LRESULT CMyWindow::OnPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandl
 	PAINTSTRUCT ps;
 	BeginPaint(&ps);
 
-	RECT rc;
-	GetWindowRect(&rc);
-	HDC hDC = GetWindowDC();
+	//RECT rc;
+	//GetWindowRect(&rc);
+	//HDC hDC = GetWindowDC();
 
-	int TAR_HIGH = 759;
-	int TAR_WEIGHT = 1439;
-	HBITMAP hbitmap = (HBITMAP)LoadImage(NULL, L"window.bkg.bmp", IMAGE_BITMAP, TAR_WEIGHT, TAR_HIGH, LR_LOADFROMFILE);
-	
-	//建立DC 
-	HDC hMdc = CreateCompatibleDC(hDC);
-	SelectObject(hMdc, hbitmap);
-	BitBlt(hDC, 0, 0, rc.right - rc.left, rc.bottom - rc.top, hMdc, 0, 0, SRCCOPY);
-	DeleteDC(hMdc);
+	//int TAR_HIGH = 759;
+	//int TAR_WEIGHT = 1439;
+	//HBITMAP hbitmap = (HBITMAP)LoadImage(NULL, L"window.bkg.bmp", IMAGE_BITMAP, TAR_WEIGHT, TAR_HIGH, LR_LOADFROMFILE);
+	//
+	////建立DC 
+	//HDC hMdc = CreateCompatibleDC(hDC);
+	//SelectObject(hMdc, hbitmap);
+	//BitBlt(hDC, 0, 0, rc.right - rc.left, rc.bottom - rc.top, hMdc, 0, 0, SRCCOPY);
+	//DeleteDC(hMdc);
 
-	ReleaseDC(hDC);
-	DeleteObject(hbitmap);
+	//ReleaseDC(hDC);
+	//DeleteObject(hbitmap);
 	
 	/*Gdiplus::Image image(L"window.bkg.png");
 	Gdiplus::Status ret = image.GetLastStatus();

@@ -14,14 +14,16 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 
 	CMyWindow dlgMain;
 
-	DWORD dStyle = WS_OVERLAPPED | WS_THICKFRAME  | WS_MAXIMIZEBOX;//| WS_MINIMIZEBOX | WS_SYSMENU
+	DWORD dStyle = WS_POPUPWINDOW | WS_MINIMIZEBOX | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;//| WS_MINIMIZEBOX | WS_SYSMENU
+	//DWORD dStyle = WS_OVERLAPPED | WS_THICKFRAME | WS_MAXIMIZEBOX;//| WS_SYSMENU | WS_MINIMIZEBOX
 	if (dlgMain.Create(nullptr, CMyWindow::rcDefault, nullptr, dStyle) == NULL)
 	{
 		ATLTRACE(_T("Main dialog creation failed!\n"));
 		return 0;
 	}
-
+	//dlgMain.UpdateWindow();
 	dlgMain.ShowWindow(nCmdShow);
+	
 
 	int nRet = theLoop.Run();
 
