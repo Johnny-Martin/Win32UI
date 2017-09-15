@@ -14,17 +14,24 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 
 	CMyWindow dlgMain;
 
-	DWORD dStyle = WS_POPUPWINDOW | WS_MINIMIZEBOX | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;//| WS_MINIMIZEBOX | WS_SYSMENU
-	//DWORD dStyle = WS_OVERLAPPED | WS_THICKFRAME | WS_MAXIMIZEBOX;//| WS_SYSMENU | WS_MINIMIZEBOX
-	if (dlgMain.Create(nullptr, CMyWindow::rcDefault, nullptr, dStyle) == NULL)
+	DWORD dStyle = WS_POPUP | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;//| WS_MINIMIZEBOX | WS_SYSMENU
+	//DWORD dStyle = WS_OVERLAPPED | WS_THICKFRAME | WS_MAXIMIZEBOX | WS_SYSMENU | WS_MINIMIZEBOX;// //WS_OVERLAPPEDWINDOW;// 
+	if (dlgMain.Create(nullptr, 0, nullptr, dStyle) == NULL)// CMyWindow::rcDefault
 	{
 		ATLTRACE(_T("Main dialog creation failed!\n"));
 		return 0;
 	}
 	//dlgMain.UpdateWindow();
-	dlgMain.ShowWindow(nCmdShow);
-	
-
+	dlgMain.ShowWindow(SW_SHOW);
+	dlgMain.m_hWnd;
+	RECT rc;
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = 1000;
+	rc.bottom = 1000;
+	//dlgMain.MoveWindow(&rc);
+	::SetWindowPos(dlgMain.m_hWnd, HWND_TOP, 100, 100, 1000, 1000, SWP_SHOWWINDOW);
+	//::SetWindowPos(dlgMain.m_hWnd, HWND_TOP, 0, 0, 100, 100, SWP_SHOWWINDOW);
 	int nRet = theLoop.Run();
 
 	_Module.RemoveMessageLoop();
