@@ -129,6 +129,7 @@ public:
 		pLoop->RemoveMessageFilter(this);
 		pLoop->RemoveIdleHandler(this);
 
+		auto cnt = pLoop->m_aMsgFilter.GetSize();
 		bHandled = FALSE;
 		return 1;
 	}

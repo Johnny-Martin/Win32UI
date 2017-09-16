@@ -1,7 +1,29 @@
 #include "stdafx.h"
 #include "CMyWindow.h"
 
+CMyWindow::~CMyWindow()
+{
+	//if (::IsWindow(m_hWnd))
+	//{
+	//	//PostMessage(WM_DESTROY);
+	//	ShowWindow(SW_HIDE);
+	//	::DestroyWindow(m_hWnd);
+	//	m_hWnd = NULL;
+	//}
+}
+BOOL CMyWindow::PreTranslateMessage(MSG* pMsg) 
+{
+	return FALSE;
+}
+LRESULT CMyWindow::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+	CMessageLoop* pLoop = _Module.GetMessageLoop();
+	ATLASSERT(pLoop != NULL);
+	pLoop->AddMessageFilter(this);
 
+	bHandled = false;
+	return 0;
+}
 LRESULT CMyWindow::OnEraseBkgnd(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	//DefWindowProc();
@@ -47,15 +69,12 @@ LRESULT CMyWindow::OnPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandl
 	EndPaint(&ps);
 
 	bHandled = false;
-	DefWindowProc();
-	return 0;
+	return DefWindowProc();
 }
 LRESULT CMyWindow::OnNcPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	//要想绘制非客户区，必须使用GDI而不能使用GDI+
-	DefWindowProc();
-	//bHandled = true;
-	return 0;
+	return	DefWindowProc();
 }
 LRESULT CMyWindow::OnMouseMove(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
@@ -67,8 +86,16 @@ LRESULT CMyWindow::OnMouseLeave(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& b
 }
 LRESULT CMyWindow::OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {	
-	PostQuitMessage(0);
+	CMessageLoop* pLoop = _Module.GetMessageLoop();
+	ATLASSERT(pLoop != NULL);
+	pLoop->RemoveMessageFilter(this);
+
+	auto filterCount = pLoop->m_aMsgFilter.GetSize();
+	if (filterCount == 0)
+	{
+		PostQuitMessage(0);
+	}
 	bHandled = FALSE;
-	return 0;
+	return 1;
 }
 
