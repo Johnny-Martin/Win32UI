@@ -295,6 +295,7 @@ void TestGdiplus(HWND hwnd, HDC hdc)
 		MessageBox(hwnd, L"º”‘ÿÕº∆¨ ß∞‹", L"æØ∏Ê", MB_OK);
 		return;
 	}
+	PixelFormat format = image.GetPixelFormat();
 	auto width  = image.GetWidth();
 	auto height = image.GetHeight();
 	Graphics graphic(hdc);
